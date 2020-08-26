@@ -6,7 +6,6 @@ public class AuthVO {
 	private String GROUP_CREAT_DE;
 	private String GROUP_DC;
 	
-	
 	public String getGROUP_ID() {
 		return GROUP_ID;
 	}
@@ -31,6 +30,5 @@ public class AuthVO {
 	public void setGROUP_DC(String gROUP_DC) {
 		GROUP_DC = gROUP_DC;
 	}
-	
 	
 }

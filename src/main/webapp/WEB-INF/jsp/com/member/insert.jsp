@@ -131,7 +131,7 @@
 					        </th>
 					        <td width="80%" nowrap="nowrap">
 					           
-					           <input name="ORGNZT_ID" type="text" value="" />
+					           <input name="ORGNZT_ID" type="text" value="ORGNZT_0000000000000" />
 					        </td>
 					      </tr>
 					      
@@ -178,14 +178,14 @@
 $(document).ready(function(){
 	$("#EMPLYR_ID").blur(function(){
 		var input_id_value = $(this).val();
-		var urlvar ="<c:url value='/com/member/restViewMember.do?EMPLYR_ID=" + input_id_value + "' />";
-		//alert(urlvar); //디버그
-		//Ajax로 API서버와 통신
+		var urlvar = "<c:url value='/com/member/restViewMember.do?EMPLYR_ID=" + input_id_value + "' />";
+		//alert(urlvar);//디버그
+		//Ajax로 스프링API서버와 통신
 		$.ajax({
 			type:'get',
 			url: urlvar,
 			success:function(result){
-				if(result == 1){ //중복아이디가 존재한다면
+				if(result == '1'){//조건: 중복아이디가 존재한다면
 					//전송버튼 비활성화
 					alert("중복아이디가 존재합니다.");
 					$("#insert_member").attr("disabled", true);
@@ -196,28 +196,26 @@ $(document).ready(function(){
 					$("#insert_member").attr("disabled", false);
 					$("#insert_member").css({"opacity":"1","background-color":"white"});
 				}
-				
 			},
 			error:function(){
-				//alert("RestAPI서버가 작동하지 않습니다.")
+				alert("RestAPI서버가 작동하지 않습니다.");
 			}
-			
 		});
 	});
-	//유효성 검사(아래 if문)
 	$("#insert_member").click(function(){
+		//유효성 검사(아래 if문)
 		if($("#EMPLYR_ID").val() == '') {
 			alert("아이디값은 필수 입니다.");
 			$("#EMPLYR_ID").focus();
 			return;
 		}
 		if($("#PASSWORD").val() == '') {
-			alert("암호힌트 답변값은 필수 입니다.");
+			alert("암호값은 필수 입니다.");
 			$("#PASSWORD").focus();
 			return;
 		}
 		if($("#PASSWORD_HINT").val() == '') {
-			alert("아이디값은 필수 입니다.");
+			alert("암호힌트값은 필수 입니다.");
 			$("#PASSWORD_HINT").focus();
 			return;
 		}
@@ -231,6 +229,7 @@ $(document).ready(function(){
 	});
 	
 });
+
 </script>
 </body>
 </html>

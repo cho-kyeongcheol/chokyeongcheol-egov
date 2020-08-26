@@ -2,6 +2,12 @@ package egovframework.let.main.web;
 
 import java.util.Map;
 
+import egovframework.com.cmm.ComDefaultVO;
+import egovframework.let.cop.bbs.service.BoardVO;
+import egovframework.let.cop.bbs.service.EgovBBSManageService;
+
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,11 +16,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
-import egovframework.com.cmm.ComDefaultVO;
-import egovframework.let.cop.bbs.service.BoardVO;
-import egovframework.let.cop.bbs.service.EgovBBSManageService;
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 /**
  * 템플릿 메인 페이지 컨트롤러 클래스(Sample 소스)
@@ -54,15 +55,42 @@ public class EgovMainController {
 		return "";
 	}
 
-	/**
-	 * 타일즈를 이용한 메인 페이지 매핑
+	/*
+	 * 타일즈을 이용한 메인 페이지 매핑
 	 */
 	@RequestMapping(value="/tiles/main.do")
-	public String main(HttpServletRequest request) throws Exception{
+	public String main(ModelMap model, HttpServletRequest request) throws Exception {
+		
+		// 공지사항 메인 컨텐츠 조회 시작 ---------------------------------
+		BoardVO boardVO = new BoardVO();
+		boardVO.setPageUnit(5);
+		boardVO.setPageSize(10);
+		boardVO.setBbsId("BBSMSTR_AAAAAAAAAAAA");
+
+		PaginationInfo paginationInfo = new PaginationInfo();
+
+		paginationInfo.setCurrentPageNo(boardVO.getPageIndex());
+		paginationInfo.setRecordCountPerPage(boardVO.getPageUnit());
+		paginationInfo.setPageSize(boardVO.getPageSize());
+
+		boardVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		boardVO.setLastIndex(paginationInfo.getLastRecordIndex());
+		boardVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+
+		Map<String, Object> map = bbsMngService.selectBoardArticles(boardVO, "BBSA02");
+		model.addAttribute("notiList", map.get("resultList"));
+
+		boardVO.setBbsId("BBSMSTR_BBBBBBBBBBBB");
+		map = bbsMngService.selectBoardArticles(boardVO, "BBSA02");
+		model.addAttribute("galList", map.get("resultList"));
+
+		// 공지사항 메인컨텐츠 조회 끝 -----------------------------------
+
+		
 		return "EgovMainView.tiles";
 	}
-	
-	 /* 템플릿 메인 페이지 조회
+	/**
+	 * 템플릿 메인 페이지 조회
 	 * @return 메인페이지 정보 Map [key : 항목명]
 	 *
 	 * @param request

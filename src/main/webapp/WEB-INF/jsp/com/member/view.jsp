@@ -170,15 +170,14 @@
 $(document).ready(function(){
 	
 	$("#delete_member").click(function(){
-		if(confirm("정말로 삭제 하겠습니까?")){
+		if(confirm("정말로 삭제 하시겠습니까?")){
 			
 		}else{
 			return false;
 		}
 		$("#viewForm").attr("action", "<c:url value='/com/member/deleteMember.do'/>");
-		$("#viewForm").attr("method","post");
+		$("#viewForm").attr("method", "post");
 		$("#viewForm").submit();
-	
 	});
 	$("#update_member").click(function(){
 		$("#viewForm").attr("action", "<c:url value='/com/member/updateMember.do'/>");
@@ -186,6 +185,7 @@ $(document).ready(function(){
 	});
 	
 });
+
 </script>
 </body>
 </html>
