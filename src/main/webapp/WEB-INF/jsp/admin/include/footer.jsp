@@ -8,7 +8,7 @@
     <div class="p-3">
       <h5>Title</h5>
       <p>Sidebar content</p>
-      <a href="<c:url value='/uat/uia/actionLogout.do'/>" class="btn btn-primary btn-lg btn-block">로그아웃</a>
+      <a href="<c:url value='/tiles/logout.do'/>" class="btn btn-primary btn-lg btn-block">로그아웃</a>
     </div>
   </aside>
   <!-- /.control-sidebar -->
@@ -33,14 +33,21 @@
 <script src="<c:url value='/'/>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<c:url value='/'/>dist/js/adminlte.min.js"></script>
+
 <script>
 $(document).ready(function() {
-    var current = location.pathname;
+    //var current = location.search;
+    var current = '${bdMstr.bbsId}';
+    if(current==''){
+    	current = '${boardVO.bbsId}';
+    }
+    //alert(current);//디버그용
     //alert(current.split("/admin",3)[1]);//디버그 값
-    var current_split = current.split("/admin",3)[1];//board 또는 member
+    //var current_split = current.split("/admin",3)[1];//board 또는 member
+    var current_split = current;
     $('.nav-treeview li a').each(function(){
         var $this = $(this);
-        if(current=="/admin" || current=="/admin/") {
+        if(current=="" || current=="/admin/") {
         	
         }else{
 	        //if($this.attr('href').includes(current) == true){
@@ -53,5 +60,6 @@ $(document).ready(function() {
     })
  });
 </script>
+
 </body>
 </html>

@@ -30,7 +30,7 @@ public class ImagePaginationRenderer extends AbstractPaginationRenderer implemen
 	}
 	
 	public void initVariables(){
-		firstPageLabel    = "<li class='page-item'>&#160;</li><li><a class='page-link'href=\"?pageIndex={1}\" onclick=\"{0}({1});return false; \"><img src=\"" + servletContext.getContextPath() +  "/images/egovframework/com/cmm/mod/icon/icon_prevend.gif\" alt=\"처음\"   border=\"0\"/></a></li>";
+		firstPageLabel    = "<li class='page-item'>&#160;</li><li><a class='page-link' href=\"?pageIndex={1}\" onclick=\"{0}({1});return false; \"><img src=\"" + servletContext.getContextPath() +  "/images/egovframework/com/cmm/mod/icon/icon_prevend.gif\" alt=\"처음\"   border=\"0\"/></a></li>";
         previousPageLabel = "<li class='page-item'><a class='page-link' href=\"?pageIndex={1}\" onclick=\"{0}({1});return false; \"><img src=\"" + servletContext.getContextPath() +  "/images/egovframework/com/cmm/mod/icon/icon_prev.gif\"    alt=\"이전\"   border=\"0\"/></a></li>";
         currentPageLabel  = "<li class='active page-item'><strong><a class='page-link'>{0}</a></strong></li>";
         otherPageLabel    = "<li class='page-item'><a class='page-link' href=\"?pageIndex={1}\" onclick=\"{0}({1});return false; \">{2}</a></li>";
